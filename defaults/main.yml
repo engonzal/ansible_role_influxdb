@@ -1,0 +1,11 @@
+---
+# defaults file for ansible_role_influxdb
+influx_version: "1.6.4"
+influx_user: "{{ ansible_user }}"
+influx_telemetry_disable: "true"
+
+influx_dir_main: "/home/{{ influx_user }}/influxdb"
+influx_dir_meta: "{{ influx_dir_main }}/meta"
+influx_dir_data: "{{ influx_dir_main }}/data"
+influx_dir_wal: "{{ influx_dir_main }}/wal"
+influx_dir_service: "{{ systemd_dir_user | default('/home/' + influx_user + '/.config/systemd/user') }}"

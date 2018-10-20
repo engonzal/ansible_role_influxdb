@@ -1,0 +1,8 @@
+---
+# handlers file for ansible_role_influxdb
+- name: restart influxdb
+  systemd:
+    daemon-reload: yes
+    name: influxdb
+    state: restarted
+    user: true

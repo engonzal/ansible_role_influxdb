@@ -1,0 +1,32 @@
+---
+# tasks file for ansible_role_influxdb
+- name: Create main influxdb folder
+  file:
+    dest: "{{ item }}"
+    state: directory
+    recurse: yes
+  loop:
+    - "{{ influx_dir_main }}"
+    - "{{ influx_dir_meta }}"
+    - "{{ influx_dir_data }}"
+    - "{{ influx_dir_wal }}"
+    - "{{ influx_dir_logrotated }}"
+    - "{{ influx_dir_service }}"
+
+- name: Download Influx Binaries
+  unarchive:
+    src: "https://dl.influxdata.com/influxdb/releases/influxdb-{{ influx_version }}_linux_amd64.tar.gz"
+    dest: "{{ influx_dir_main }}"
+    remote_src: yes
+    creates: "{{ influx_dir_main }}/influxdb-{{ influx_version }}-1/usr/bin/influx"
+
+- name: Copy over InfluxDB config files
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  loop:
+    - src: influxdb.conf.j2
+      dest: "{{ influx_dir_main }}/influxdb.conf"
+    - src: influxdb.service.j2
+      dest: "{{ influx_dir_service }}/influxdb.service"
+  notify: restart influxdb
