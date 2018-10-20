@@ -2,5 +2,5 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - ansible_role_systemduser
+    - ansible_role_systemd_user
     - ansible_role_influxdb

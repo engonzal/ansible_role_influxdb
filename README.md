@@ -12,7 +12,7 @@ Most of the defaults should be fine, see defaults/main.yml for more.
     - hosts: servers
       user: root
       roles:
-        - { role: engonzal.ansible_role_systemduser, tags: [ 'systemd'] }
+        - { role: engonzal.ansible_role_systemd_user, tags: [ 'systemd'] }
     # Influx play, runs as a local user on the host
     - hosts: servers
       user: engonzal

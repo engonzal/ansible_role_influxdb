@@ -24,5 +24,4 @@ galaxy_info:
       versions:
         - xenial
         - bionic
-dependencies:
-  - engonzal.ansible_role_systemduser
+dependencies: []
