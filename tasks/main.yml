@@ -30,3 +30,10 @@
     - src: influxdb.service.j2
       dest: "{{ influx_dir_service }}/influxdb.service"
   notify: restart influxdb
+
+- name: Enable influxdb user service
+  systemd:
+    name: influxdb
+    enabled: yes
+    scope: user
+    force: yes
